@@ -1,21 +1,32 @@
-import axios from "axios";
-import React, { useState } from "react";
-import { Button } from "../Button";
-import { Input } from "../Input";
+import axios from "axios"
+import React, { useState } from "react"
+import { Button } from "../Button"
+import { Input } from "../Input"
+import { useNavigate } from "react-router-dom"
 
 export const Login = () => {
 
+  const navigate = useNavigate()
   const [login, setLogin] = useState<string>("")
   const [senha, setSenha] = useState<string>("")
+  const [loading, setLoading] = useState<boolean>(false)
+  const [erro, setErro] = useState<string>("")
 
   const postLogin = async (event: React.FormEvent<HTMLFormElement>) : Promise<void> => {
     event.preventDefault()
-    console.log(event.target);
+    setLoading(true)
     try {
       const response = await axios.post('http://3.221.159.196:3307/auth/login', { login, senha })
-      console.log(response)
+      localStorage.setItem('jwt', response.data.access_token)
+      localStorage.setItem('id', response.data.id)
+      navigate('/artigos')
     } catch (error: any) {
-      console.log(error)
+      if (error.response.data.statusCode === 401) {
+        setErro('Usuário ou senha Inválidos');
+      } else {
+        setErro('Erro ao autenticar usuário. Tente novamente mais tarde.');
+      }
+      setLoading(false)
     }
   }
 
@@ -55,8 +66,11 @@ export const Login = () => {
               />
             </div>
           </div>
+          {erro && <span className="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">
+            { erro }
+          </span>}
           <div>
-            <Button type="submit">Login</Button>
+            <Button type="submit" disabled={loading}>{loading ? 'Carregando...' : 'Login'}</Button>
           </div>
         </form>
       </div>
