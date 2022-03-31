@@ -1,6 +1,5 @@
-import { useEffect } from "react";
 import axios from "axios";
-import { useState } from "react";
+import React, { useState } from "react";
 import { Button } from "../Button";
 import { Input } from "../Input";
 
@@ -9,18 +8,16 @@ export const Login = () => {
   const [login, setLogin] = useState<string>("")
   const [senha, setSenha] = useState<string>("")
 
-  const getArtigos = async () : Promise<void> => {
+  const postLogin = async (event: React.FormEvent<HTMLFormElement>) : Promise<void> => {
+    event.preventDefault()
+    console.log(event.target);
     try {
-      const response = await axios.get('http://3.221.159.196:3307/artigos')
+      const response = await axios.post('http://3.221.159.196:3307/auth/login', { login, senha })
       console.log(response)
-    } catch (error) {
+    } catch (error: any) {
       console.log(error)
     }
   }
-
-  useEffect(() => {
-    getArtigos()
-  }, [])
 
   return (
     <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
@@ -32,7 +29,7 @@ export const Login = () => {
             alt="Workflow"
           />
         </div>
-        <form className="mt-8 space-y-6" action="#">
+        <form className="mt-8 space-y-6" action="#" onSubmit={postLogin}>
           <div className="rounded-md shadow-sm -space-y-px">
             <div className="mt-5">
               <Input
