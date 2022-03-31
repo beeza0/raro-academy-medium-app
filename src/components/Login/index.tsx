@@ -1,7 +1,27 @@
+import { useEffect } from "react";
+import axios from "axios";
+import { useState } from "react";
 import { Button } from "../Button";
 import { Input } from "../Input";
 
 export const Login = () => {
+
+  const [login, setLogin] = useState<string>("")
+  const [senha, setSenha] = useState<string>("")
+
+  const getArtigos = async () : Promise<void> => {
+    try {
+      const response = await axios.get('http://3.221.159.196:3307/artigos')
+      console.log(response)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    getArtigos()
+  }, [])
+
   return (
     <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
@@ -21,6 +41,8 @@ export const Login = () => {
                 label="Login"
                 placeholder="login"
                 required
+                value={ login }
+                onChange={ (e: any) => setLogin(e.target.value) }
               />
             </div>
 
@@ -31,6 +53,8 @@ export const Login = () => {
                 label="senha"
                 placeholder="********"
                 required
+                value={ senha }
+                onChange={ (e: any) => setSenha(e.target.value) }
               />
             </div>
           </div>
