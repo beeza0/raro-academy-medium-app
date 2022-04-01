@@ -17,7 +17,6 @@ export const ArticleThumbnail: React.FC<ArticleThumbnailProps> = ({
   return (
     
     <div className="flex flex-col w-2/3 mt-5">
-      {console.log(id)}   
       <header className="flex flex-row gap-3 items-center">
         <img
           src={ autor.avatar }
