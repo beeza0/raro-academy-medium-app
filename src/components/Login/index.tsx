@@ -1,5 +1,5 @@
 import axios from "axios"
-import React, { useState } from "react"
+import React, { useState, ChangeEvent } from "react"
 import { Button } from "../Button"
 import { Input } from "../Input"
 import { useNavigate } from "react-router-dom"
@@ -50,7 +50,7 @@ export const Login = () => {
                 placeholder="login"
                 required
                 value={ login }
-                onChange={ (e: any) => setLogin(e.target.value) }
+                onChange={ (e: ChangeEvent<HTMLInputElement>) => setLogin(e.target.value) }
               />
             </div>
 
@@ -62,7 +62,7 @@ export const Login = () => {
                 placeholder="********"
                 required
                 value={ senha }
-                onChange={ (e: any) => setSenha(e.target.value) }
+                onChange={ (e: ChangeEvent<HTMLInputElement>) => setSenha(e.target.value) }
               />
             </div>
           </div>
