@@ -9,8 +9,7 @@ export const Navigation = () => {
         <Link to="/">Home</Link>
         <Link to="/artigos">Meus Artigos</Link>
         <Link to="/artigos/novo">Novo Artigo</Link>
-        {!isLoggedIn && <Link to="/login">Login</Link>}
-        <Link to="/">Logout</Link>
+        {isLoggedIn ? <Link to="/">Logout</Link> : <Link to="/login">Login</Link>}
       </>
   );
 };
