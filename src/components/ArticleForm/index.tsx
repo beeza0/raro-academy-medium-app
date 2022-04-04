@@ -21,6 +21,7 @@ export const ArticleForm: React.FC<ArticleFormProps> = ({ article, onSubmit, del
 
   useEffect(() => {
     if (article) {
+      console.log(article);
       setTitulo(article.titulo);
       setResumo(article.resumo);
       setImagem(article.imagem);
@@ -65,12 +66,12 @@ export const ArticleForm: React.FC<ArticleFormProps> = ({ article, onSubmit, del
             type="text"
             name="titulo"
             label="Titulo"
-            value={titulo}
+            value={ titulo }
             onChange={(e) => setTitulo(e.target.value)}
             required
           />
           <Input
-            placeholder="Breve rewsumo do artigo"
+            placeholder="Breve resumo do artigo"
             type="textarea"
             name="resumo"
             label="Resumo"
@@ -80,12 +81,12 @@ export const ArticleForm: React.FC<ArticleFormProps> = ({ article, onSubmit, del
           />
 
           <Input
-            placeholder="Breve rewsumo do artigo"
+            placeholder="Imagem do artigo"
             type="file"
             name="image"
             label="Banner"
             onChange={transformaImagemEmBase64}
-            required
+            required={imagem === ""}
           />
 
           <RitchTextEditor
