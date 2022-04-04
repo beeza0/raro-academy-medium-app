@@ -36,14 +36,15 @@ export const EditarArquivoPage = () => {
           'Authorization': `bearer ${token}`
         }
       })
+    navigator(`/artigo/${artigo.id}`)
     } else {
-      await axios.post<ArticleThumbnailProps>(`http://3.221.159.196:3307/artigos`, {...artigo} , {
+      const response = await axios.post<ArticleThumbnailProps>(`http://3.221.159.196:3307/artigos`, {...artigo} , {
         headers: {
           'Authorization': `bearer ${token}`
         }
       })
+      navigator(`/artigo/${response.data.id}`)
     }
-    navigator('/artigos')
   }
 
   const deleteArticle = async (articleId: number) => {
