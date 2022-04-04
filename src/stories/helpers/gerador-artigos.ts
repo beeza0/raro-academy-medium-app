@@ -2,8 +2,8 @@ import { faker } from '@faker-js/faker';
 import { ArticleThumbnailProps } from '../../components/ArticleThumbnail/ArticleThumbnail.types';
 
 export const geraArtigos = (quantidade: number): ArticleThumbnailProps[] => {
-  return Array.from(new Array(quantidade)).map((_, index) => ({
-    id: index,
+  return Array.from(new Array(quantidade)).map(() => ({
+    id: faker.datatype.number(),
     imagem: faker.image.imageUrl(),
     titulo: faker.lorem.sentence(),
     resumo: faker.lorem.paragraph(),
@@ -12,6 +12,7 @@ export const geraArtigos = (quantidade: number): ArticleThumbnailProps[] => {
     autor: {
       nome: faker.name.firstName(),
       avatar: faker.image.avatar(),
+      id: faker.datatype.number()
     }
   }));
 }
