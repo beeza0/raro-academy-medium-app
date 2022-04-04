@@ -1,4 +1,3 @@
-import faker from "@faker-js/faker";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
@@ -8,7 +7,7 @@ export const ArtigoPage = () => {
   const [article, setArticle] = useState<string>('');
   const [autor, setAutor] = useState({
     nome: "",
-    avatar: faker.image.avatar(),
+    avatar: "",
   });
   const [dataPublicacao] = useState(new Date());
   const {id} = useParams()
@@ -19,8 +18,8 @@ export const ArtigoPage = () => {
 
   async function loadArticle() {
     const response = await axios.get(`http://3.221.159.196:3307/artigos/${id}`)
-    setArticle(response.data.conteudo)
-    setAutor({...autor, nome: response.data.autor.nome})
+    setArticle(response.data.conteudo)    
+    setAutor({nome: response.data.autor.nome, avatar: response.data.autor.avatar})
   }
 
   return (
