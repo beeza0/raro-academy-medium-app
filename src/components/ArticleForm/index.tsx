@@ -21,7 +21,6 @@ export const ArticleForm: React.FC<ArticleFormProps> = ({ article, onSubmit, del
 
   useEffect(() => {
     if (article) {
-      console.log(article);
       setTitulo(article.titulo);
       setResumo(article.resumo);
       setImagem(article.imagem);

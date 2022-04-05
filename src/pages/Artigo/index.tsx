@@ -1,4 +1,4 @@
-import axios from "axios";
+import apiClient from '../../services/api-client';
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { ArticleView } from "../../components/ArticleView";
@@ -17,9 +17,15 @@ export const ArtigoPage = () => {
   }, []);
 
   async function loadArticle() {
-    const response = await axios.get(`http://3.221.159.196:3307/artigos/${id}`)
-    setArticle(response.data.conteudo)    
-    setAutor({nome: response.data.autor.nome, avatar: response.data.autor.avatar})
+    try {
+      const response = await apiClient.get(`/artigos/${id}`)
+      setArticle(response.data.conteudo)    
+      setAutor({nome: response.data.autor.nome, avatar: response.data.autor.avatar})
+    }
+    catch (err: any) {
+      console.log(err)      
+    }
+    
   }
 
   return (
