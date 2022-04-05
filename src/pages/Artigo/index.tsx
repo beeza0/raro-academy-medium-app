@@ -16,7 +16,7 @@ export const ArtigoPage = () => {
     loadArticle();
   }, []);
 
-  async function loadArticle() {
+  const loadArticle = async() => {
     try {
       const response = await apiClient.get(`/artigos/${id}`)
       setArticle(response.data.conteudo)    
