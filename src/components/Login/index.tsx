@@ -1,4 +1,4 @@
-import axios from "axios"
+import apiClient from '../../services/api-client'
 import React, { useState, ChangeEvent } from "react"
 import { Button } from "../Button"
 import { Input } from "../Input"
@@ -16,7 +16,7 @@ export const Login = () => {
     event.preventDefault()
     setLoading(true)
     try {
-      const response = await axios.post('http://3.221.159.196:3307/auth/login', { login, senha })
+      const response = await apiClient.post('/auth/login', { login, senha })
       localStorage.setItem('token', response.data.access_token)
       localStorage.setItem('id', response.data.id)
       navigate('/artigos')
